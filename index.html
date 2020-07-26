@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html> -->
+<html>
+
+<head>
+
+    <title>WebRTC manual Signalling</title>
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+</head>
+
+<body>
+
+    <h1>Realtime communication with WebRTC</h1>
+
+    <div id="videos">
+        <video id="localVideo" autoplay muted controls playsinline></video>
+        <video id="remoteVideo" autoplay controls playsinline></video>
+    </div>
+
+    <div>
+        <input type="button" id="getMedia" onclick=getMedia() value="Get the Media" />
+    </div>
+
+    <div>
+        <input type="button" id="createPeerConnection" onclick=createPeerConnection() value="Create Peer Connection" />
+    </div>
+
+    <div>
+        <input type="button" id="addStream" onclick=addStreamToPc() value="Add local Stream to Peer Connection" />
+    </div>
+
+    <div>
+        <input type="radio" id="makeCall" name="callerOrReceiver" onClick=CallerOrReceiver() value="makeCall">
+        <label for="makeCall">Make Call </label>
+        <input type="radio" id="recvCall" name="callerOrReceiver" onClick=CallerOrReceiver() value="recvCall">
+        <label for="recvCall">Recv Call</label>
+    </div>
+
+    <div name="Caller" style="display:none">
+        <div>
+            <input type="button" id="createOffer" onclick=createdOffer() value="Create offer & Session Description" />
+        </div>
+
+    </div>
+
+
+    <div>
+        <div>
+            <span name="Caller" style="display:none">Caller Session Description - Copy and sent to Recevier </span>
+            <span name="Receiver" style="display:none">Caller Session Description - Paste here Caller's session
+                Description</span>
+        </div>
+        <textarea id="callerSessionDescTextBox"> </textarea>
+        <div>
+            <span name="Caller" style="display:none"> Caller ICE Candidates - Copy and sent to Recevier </span>
+            <span name="Receiver" style="display:none"> Caller ICE Candidates - Paste here Caller's ICE Candidates
+            </span>
+        </div>
+        <textarea id="callerIceCandidatesTextBox"> </textarea>
+    </div>
+
+    <div name="Receiver" style="display:none">
+        <input type="button" id="createAnswer" onclick=setCallerSdpInReceiver()
+            value="Set the Remote (Caller) Session Description" />
+    </div>
+    <div name="Receiver" style="display:none">
+        <input type="button" id="receiverSetCallerIceCand" onclick=receiverSetCallerIceCand()
+            value="Add Ice Candidate of Caller" />
+    </div>
+
+    <br>
+    <br>
+    <div name="Receiver" style="display:none">
+        <div>
+            <input type="button" id="createAnswer" onclick=createAnswer() value="Create Answer & Session Description" />
+        </div>
+    </div>
+    <div>
+        <div>
+            <span name="Caller" style="display:none">Receiver Session Description - Paste here Recevier's Session
+                Description
+            </span>
+            <span name="Receiver" style="display:none">Receiver Session Description - Copy and sent to caller</span>
+        </div>
+        <textarea id="receiverSessionDescTextBox"> </textarea>
+
+    </div>
+    <div>
+        <div>
+            <span name="Caller" style="display:none">Receiver ICE Candidates - Paste here Recevier's ICE Candidates
+            </span>
+            <span name="Receiver" style="display:none">Receiver ICE Candidates - Copy and sent to caller </span>
+        </div>
+        <textarea id="receiverIceCandidatesTextBox"> </textarea>
+    </div>
+
+    <div name="Caller" style="display:none">
+        <input type="button" id="acceptAnswer" onclick=setReceiverSdpInCaller()
+            value="Set the Remote (Recevier) Session Description" />
+    </div>
+    <div name="Caller" style="display:none">
+        <input type="button" id="callerSetReceiverIceCand" onclick=callerSetReceiverIceCand()
+            value="Add Ice Candidate of Receiver" />
+    </div>
+
+    <input type="button" id="stop" onclick=stop()
+        value="Stop" />
+
+    <!-- This file is automatically added/served when running "node index.js". -->
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
